@@ -24,6 +24,7 @@ public class Sale {
     @Column(name = "sale_description")
     private String description;
 
+    @Column(name = "stock")
     private Integer stock;
 
     @Column(name = "created_at")
