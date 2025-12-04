@@ -1,7 +1,8 @@
-package com.casarick.model;
+package com.casarick.api.model;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
+@Builder
 public class SaleDetailId {
     private Long saleId;
     private Long inventoryId;
