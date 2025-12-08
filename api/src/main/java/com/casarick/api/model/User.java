@@ -35,7 +35,9 @@ public class User {
     @Column(name = "user_password")
     private String password;
 
-    @ManyToOne
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
     @JoinColumn(
             name = "role_id",
             referencedColumnName = "role_id"
@@ -43,6 +45,9 @@ public class User {
     private Role role;
 
     @ManyToMany
+            (
+                    fetch = FetchType.EAGER
+            )
     @JoinTable(
             name = "users_permissions",
             joinColumns = @JoinColumn(

@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SaleDetailDTO {
-    private Long inventoryId;
-    private Double saleAmount;
-    private Double saleDiscount;
-    private Double saleTotal;
+public class Login {
+    private String name;
+    private String lastName;
+    private String password;
 }

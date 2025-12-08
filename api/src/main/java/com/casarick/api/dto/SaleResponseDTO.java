@@ -11,13 +11,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SaleDTO {
+public class SaleResponseDTO {
     private Long id;
     private String description;
     private int stock;
+    private Double saleAmount;
+    private Double saleDiscount;
+    private Double saleTotal;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Long customerId;
-    private Long userId;
-    private Long branchId;
+
+    private CustomerDTO customerDTO;
+    private UserResponseDTO userDTO;
+    private BranchDTO branchDTO;
+    private InventoryResponseDTO InventoryDTO;
 }
