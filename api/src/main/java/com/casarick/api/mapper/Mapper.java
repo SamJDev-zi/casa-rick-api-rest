@@ -119,20 +119,24 @@ public class Mapper {
      */
     public static UserResponseDTO toDTO(User user) {
         if (user != null) {
-            List<Permission> aux =  user.getPermissions();
-            List<PermissionDTO> convertList = new ArrayList<>();
+                List<Permission> aux =  user.getPermissions();
+                List<PermissionDTO> convertList = new ArrayList<>();
 
-            for (Permission p : aux) {
-                convertList.add(toDTO(p));
-            }
+                for (Permission p : aux) {
+                    if (p != null ) {
 
-            return UserResponseDTO.builder()
-                    .id(user.getId())
-                    .name(user.getName())
-                    .lastName(user.getLastName())
-                    .phoneNumber(user.getPhoneNumber())
-                    .permissions(convertList)
-                    .build();
+                        convertList.add(toDTO(p));
+                    }
+                }
+
+                return UserResponseDTO.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .lastName(user.getLastName())
+                        .phoneNumber(user.getPhoneNumber())
+                        .role(user.getRole())
+                        .permissions(convertList)
+                        .build();
         }
         return null;
     }
@@ -143,16 +147,17 @@ public class Mapper {
      * @param permissions
      * @return User
      */
-    public static User toEntity(UserRequestDTO requestDTO, List<Permission> permissions) {
+    public static User toEntity(UserRequestDTO requestDTO, List<Permission> permissions, Role role) {
         if (requestDTO != null) {
-            return User.builder()
-                    .id(requestDTO.getId())
-                    .name(requestDTO.getName())
-                    .lastName(requestDTO.getLastName())
-                    .phoneNumber(requestDTO.getPhoneNumber())
-                    .password(requestDTO.getPassword())
-                    .permissions(permissions)
-                    .build();
+                return User.builder()
+                        .id(requestDTO.getId())
+                        .name(requestDTO.getName())
+                        .lastName(requestDTO.getLastName())
+                        .phoneNumber(requestDTO.getPhoneNumber())
+                        .password(requestDTO.getPassword())
+                        .role(role)
+                        .permissions(permissions)
+                        .build();
         }
         return null;
     }
@@ -311,114 +316,38 @@ public class Mapper {
         return null;
     }
 
-    /**
-     * @param sale
-     * @return SaleDTO
-     */
-    public static SaleDTO toDTO(Sale sale) {
+    public static SaleResponseDTO toDTO(Sale sale) {
         if (sale != null) {
-            return SaleDTO.builder()
+            return  SaleResponseDTO.builder()
                     .id(sale.getId())
                     .description(sale.getDescription())
-                    .stock(sale.getStock() != null ? sale.getStock() : 0) // Manejo de Integer a int
                     .createdAt(sale.getCreatedAt())
-                    .updatedAt(sale.getUpdatedAt())
-                    // Usando los IDs directos de la entidad Sale
-                    .customerId(sale.getCustomerId())
-                    .userId(sale.getUserId())
-                    .branchId(sale.getBranchId())
+                    .updatedAt(sale.getCreatedAt())
+                    .stock(sale.getStock())
+                    .saleAmount(sale.getAmount())
+                    .saleDiscount(sale.getDiscount())
+                    .saleTotal(sale.getTotal())
+                    .customerDTO(toDTO(sale.getCustomerId()))
+                    .userDTO(toDTO(sale.getUserId()))
+                    .branchDTO(toDTO(sale.getBranchId()))
                     .build();
         }
         return null;
     }
 
-    /**
-     * @param saleDTO
-     * @return Sale
-     */
-    public static Sale toEntity(SaleDTO saleDTO) {
-        if (saleDTO != null) {
+    public static Sale toEntity(SaleRequestDTO requestDTO, Customer customer, User user, Branch branch) {
+        if (requestDTO != null) {
             return Sale.builder()
-                    .Id(saleDTO.getId())
-                    .description(saleDTO.getDescription())
-                    .stock(saleDTO.getStock())
-                    .createdAt(saleDTO.getCreatedAt())
-                    .updatedAt(saleDTO.getUpdatedAt())
-                    // Mapeo de IDs de DTO a IDs de entidad
-                    .customerId(saleDTO.getCustomerId())
-                    .userId(saleDTO.getUserId())
-                    .branchId(saleDTO.getBranchId())
-                    .build();
-        }
-        return null;
-    }
-
-    /**
-     * @param saleDetailId
-     * @return SaleDetailIdDTO
-     */
-    public static SaleDetailIdDTO toDTO(SaleDetailId saleDetailId) {
-        if (saleDetailId != null) {
-            return SaleDetailIdDTO.builder()
-                    .saleId(saleDetailId.getSaleId())
-                    .inventoryId(saleDetailId.getInventoryId())
-                    .build();
-        }
-        return null;
-    }
-
-    /**
-     * @param saleDetailIdDTO
-     * @return SaleDetailId
-     */
-    public static SaleDetailId toEntity(SaleDetailIdDTO saleDetailIdDTO) {
-        if (saleDetailIdDTO != null) {
-            return SaleDetailId.builder()
-                    .saleId(saleDetailIdDTO.getSaleId())
-                    .inventoryId(saleDetailIdDTO.getInventoryId())
-                    .build();
-        }
-        return null;
-    }
-
-    /**
-     * @param saleDetail
-     * @return SaleDetailDTO
-     */
-    public static SaleDetailDTO toDTO(SaleDetail saleDetail) {
-        if (saleDetail != null) {
-            return SaleDetailDTO.builder()
-                    // Obtenemos el ID de Inventory a través de la relación ManyToOne
-                    .inventoryId(saleDetail.getInventory() != null ? saleDetail.getInventory().getId() : null)
-                    .saleAmount(saleDetail.getSaleAmount())
-                    .saleDiscount(saleDetail.getSaleDiscount())
-                    .saleTotal(saleDetail.getSaleTotal())
-                    .build();
-        }
-        return null;
-    }
-
-    /**
-     * Mapea SaleDetailDTO a la entidad SaleDetail.
-     * Requiere las entidades relacionadas completas (Sale e Inventory) para construir la entidad.
-     *
-     * @param saleDetailDTO
-     * @param sale La entidad Sale a la que pertenece el detalle.
-     * @param inventory La entidad Inventory del detalle.
-     * @return SaleDetail
-     */
-    public static SaleDetail toEntity(SaleDetailDTO saleDetailDTO, Sale sale, Inventory inventory) {
-        if (saleDetailDTO != null) {
-            return SaleDetail.builder()
-                    .id(SaleDetailId.builder()
-                            .saleId(sale != null ? sale.getId() : null)
-                            .inventoryId(inventory != null ? inventory.getId() : null)
-                            .build())
-                    .sale(sale)
-                    .inventory(inventory)
-                    .saleAmount(saleDetailDTO.getSaleAmount())
-                    .saleDiscount(saleDetailDTO.getSaleDiscount())
-                    .saleTotal(saleDetailDTO.getSaleTotal())
+                    .description(requestDTO.getDescription())
+                    .createdAt(requestDTO.getCreatedAt())
+                    .updatedAt(requestDTO.getUpdatedAt())
+                    .stock(requestDTO.getStock())
+                    .amount(requestDTO.getSaleAmount())
+                    .discount(requestDTO.getSaleDiscount())
+                    .total(requestDTO.getSaleTotal())
+                    .customerId(customer)
+                    .userId(user)
+                    .branchId(branch)
                     .build();
         }
         return null;
