@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for casa-rick-api-rest-cutsia on 2025-12-09T19:58:27Z
+# fly.toml app configuration file generated for casa-rick-api-rest-ntogeq on 2025-12-09T20:11:47Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'casa-rick-api-rest-cutsia'
+app = 'casa-rick-api-rest-ntogeq'
 primary_region = 'gru'
 
 [build]
