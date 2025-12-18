@@ -6,6 +6,7 @@ import com.casarick.api.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -36,6 +37,15 @@ public class TypeController {
     @PostMapping
     public ResponseEntity<TypeDTO> createNewType(@RequestBody Type type) {
         TypeDTO typeDTO = service.createNewType(type);
-        return ResponseEntity.created(URI.create("/api/types/" + typeDTO.getName())).body(typeDTO);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/api/types/{name}")
+                .buildAndExpand(type.getName())
+                .toUri();
+
+        return ResponseEntity.created(location).body(typeDTO);
+
+        //return ResponseEntity.created(URI.create("/api/types/" + typeDTO.getName())).body(typeDTO);
     }
 }

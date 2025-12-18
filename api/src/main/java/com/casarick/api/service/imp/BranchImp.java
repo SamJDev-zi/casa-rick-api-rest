@@ -31,6 +31,7 @@ public class BranchImp implements BranchService {
 
     @Override
     public BranchDTO createNewBranch(Branch branch) {
+        branch.setActive(true);
         return Mapper.toDTO(repository.save(branch));
     }
 

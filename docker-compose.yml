@@ -1,6 +1,6 @@
 services:
   api:
-    build: casa-rick-api-rest/api #nombre de la carpeta donde está el DockerFile
+    build: api/ #nombre de la carpeta donde está el DockerFile
     mem_limit: 612m
     ports:
       - "8080:8080"
@@ -12,7 +12,7 @@ services:
     depends_on:
       db_casa_rick:
           condition: service_healthy
-  db_casa_rick: #configuraciones de base de datos dockerizada
+  db_casa_rick: #configuraciones de base de datos dockerizada docker-compose down --rmi all -v
     image: mysql:8.0.33 #misma versión que esté en el pom
     ports:
       - "3307:3306"
@@ -21,10 +21,8 @@ services:
       MYSQL_PASSWORD: sosdbmnm
       MYSQL_DATABASE: db_casa_rick
     restart: always
+    # ---------------------------------------------
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 10s
       retries: 10
-
-    volumes:
-      - ./db_init:/docker-entrypoint-initdb.d

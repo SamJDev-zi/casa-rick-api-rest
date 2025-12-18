@@ -6,6 +6,7 @@ import com.casarick.api.service.IndustryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -36,6 +37,15 @@ public class IndustryController {
     @PostMapping
     public ResponseEntity<IndustryDTO> createNewIndustry(@RequestBody Industry industry) {
         IndustryDTO industryDTO = service.createNewIndustry(industry);
-        return ResponseEntity.created(URI.create("/api/industries/" + industryDTO.getName())).body(industryDTO);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/api/industries/{name}")
+                .buildAndExpand(industry.getName())
+                .toUri();
+
+        return ResponseEntity.created(location).body(industryDTO);
+
+        //return ResponseEntity.created(URI.create("/api/industries/" + industryDTO.getName())).body(industryDTO);
     }
 }
