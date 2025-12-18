@@ -68,17 +68,10 @@ public class Reservation {
     )
     private Branch branch;
 
-    @ManyToMany
-    @JoinTable(
-            name = "reservations_detail",
-            joinColumns = @JoinColumn(
-                    name = "reservation_id",
-                    referencedColumnName = "reservation_id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "inventory_id",
-                    referencedColumnName = "inventory_id"
-            )
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(
+            name = "inventory_id",
+            referencedColumnName = "inventory_id"
     )
-    private List<Inventory> inventories;
+    private Inventory inventory;
 }

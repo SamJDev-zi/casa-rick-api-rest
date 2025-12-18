@@ -62,6 +62,7 @@ public class InventoryImp implements InventoryService {
                 .orElseThrow(() -> new NotFoundException("Branch not found with id: " + requestDTO.getBranchId()));
 
         Inventory inventory = Mapper.toEntity(requestDTO, product, branch);
+
         inventory.setCreated(LocalDateTime.now());
         inventory.setUpdated(LocalDateTime.now());
         return Mapper.toDTO(inventoryRepository.save(inventory));

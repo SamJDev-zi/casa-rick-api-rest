@@ -25,5 +25,5 @@ public class ReservationResponseDTO {
     private CustomerDTO customerDTO;
     private UserResponseDTO userDTO;
     private BranchDTO branchDTO;
-    private List<InventoryResponseDTO> inventoriesDTO;
+    private InventoryResponseDTO inventoryDTO;
 }

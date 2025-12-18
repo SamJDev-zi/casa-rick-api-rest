@@ -6,6 +6,7 @@ import com.casarick.api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,13 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> createNewProduct(@RequestBody ProductRequestDTO requestDTO) {
         ProductResponseDTO product = service.createNewProduct(requestDTO);
 
-        return ResponseEntity.created(URI.create("/api/products/" + product.getName())).body(product);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/api/products/{name}")
+                .buildAndExpand(product.getName())
+                .toUri();
+
+        return ResponseEntity.created(location).body(product);
     }
 
     @PutMapping("/{id}")

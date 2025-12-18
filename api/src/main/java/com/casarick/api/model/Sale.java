@@ -63,7 +63,7 @@ public class Sale {
     )
     private Branch branchId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name = "inventory_id",
             referencedColumnName = "inventory_id"

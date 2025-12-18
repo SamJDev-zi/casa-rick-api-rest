@@ -224,6 +224,7 @@ public class Mapper {
                     .stock(inventory.getStock())
                     .created(inventory.getCreated())
                     .updated(inventory.getUpdated())
+                    .branchDTO(toDTO(inventory.getBranch()))
                     .build();
         }
         return null;
@@ -259,13 +260,6 @@ public class Mapper {
      */
     public static ReservationResponseDTO toDTO(Reservation reservation) {
         if (reservation != null) {
-            List<Inventory> aux = reservation.getInventories();
-            List<InventoryResponseDTO> convertList = new ArrayList<>();
-
-            for (Inventory i : aux) {
-                convertList.add(toDTO(i));
-            }
-
             return ReservationResponseDTO.builder()
                     .id(reservation.getId())
                     .description(reservation.getDescription())
@@ -276,7 +270,7 @@ public class Mapper {
                     .created(reservation.getCreated())
                     .updated(reservation.getUpdated())
                     .expiration(reservation.getExpiration())
-                    .inventoriesDTO(convertList)
+                    .inventoryDTO(toDTO(reservation.getInventory()))
                     .customerDTO(toDTO(reservation.getCustomer()))
                     .userDTO(toDTO(reservation.getUser()))
                     .branchDTO(toDTO(reservation.getBranch()))
@@ -291,11 +285,10 @@ public class Mapper {
      * @param customer
      * @param user
      * @param branch
-     * @param inventories
      * @return Reservation
      */
     public static Reservation toEntity(ReservationRequestDTO requestDTO, Customer customer, User user, Branch branch
-                                       ,List<Inventory> inventories) {
+                                       ,Inventory inventory) {
         if (requestDTO != null) {
             return Reservation.builder()
                     .id(requestDTO.getId())
@@ -310,7 +303,7 @@ public class Mapper {
                     .customer(customer)
                     .user(user)
                     .branch(branch)
-                    .inventories(inventories)
+                    .inventory(inventory)
                     .build();
         }
         return null;
@@ -330,6 +323,7 @@ public class Mapper {
                     .customerDTO(toDTO(sale.getCustomerId()))
                     .userDTO(toDTO(sale.getUserId()))
                     .branchDTO(toDTO(sale.getBranchId()))
+                    .InventoryDTO(toDTO(sale.getInventory()))
                     .build();
         }
         return null;

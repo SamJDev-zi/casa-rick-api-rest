@@ -1,5 +1,6 @@
 package com.casarick.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,5 +26,5 @@ public class ReservationRequestDTO {
     private Long customerId;
     private Long userId;
     private Long branchId;
-    private List<Long> inventoriesId;
+    private Long inventoryId;
 }

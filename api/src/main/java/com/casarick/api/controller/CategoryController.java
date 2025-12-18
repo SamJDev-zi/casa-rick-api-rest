@@ -6,6 +6,7 @@ import com.casarick.api.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -35,6 +36,14 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryDTO> createNewCategory(@RequestBody Category category) {
         CategoryDTO categoryDTO = service.createNewCategory(category);
-        return ResponseEntity.created(URI.create("/api/categories/" + categoryDTO.getName())).body(categoryDTO);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/api/categories/{name}")
+                .buildAndExpand(category.getName())
+                .toUri();
+
+        return ResponseEntity.created(location).body(categoryDTO);
+        //return ResponseEntity.created(URI.create("/api/categories/" + categoryDTO.getName())).body(categoryDTO);
     }
 }
