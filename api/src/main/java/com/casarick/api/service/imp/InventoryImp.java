@@ -51,7 +51,12 @@ public class InventoryImp implements InventoryService {
     public List<InventoryResponseDTO> getAllInventoriesByCreated(LocalDateTime localDateTime, Long idBranch) {
         Branch branch = branchRepository.findById(idBranch)
                 .orElseThrow(() -> new NotFoundException("Branch not found with id: " + idBranch));
-        List<Inventory> inventoryList = inventoryRepository.getAllByCreatedAndBranch(localDateTime, branch);
+
+        LocalDateTime startOfDay = localDateTime.toLocalDate().atStartOfDay(); // 00:00:00
+        LocalDateTime endOfDay = localDateTime.toLocalDate().atTime(23, 59, 59, 999999); // 23:59:59
+
+        List<Inventory> inventoryList = inventoryRepository.findByCreatedBetweenAndBranch(startOfDay, endOfDay, branch);
+
         return inventoryList.stream().map(Mapper::toDTO).toList();
     }
 
