@@ -14,4 +14,6 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     List<Inventory> getAllByBranch(Branch branch);
 
     List<Inventory> getAllByCreatedAndBranch(LocalDateTime created, Branch branch);
+
+    List<Inventory> findByCreatedBetweenAndBranch(LocalDateTime createdAfter, LocalDateTime createdBefore, Branch branch);
 }
