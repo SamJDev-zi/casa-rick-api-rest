@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,16 @@ public class InventoryController {
     @GetMapping("/{id}")
     public ResponseEntity<InventoryResponseDTO> getInventoryById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getInventoryById(id));
+    }
+
+    @GetMapping("/branch/{id}")
+    public ResponseEntity<List<InventoryResponseDTO>> getAllInventoriesByBranch(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getAllInventoriesByBranch(id));
+    }
+
+    @GetMapping("/by-created/{created}/{id}")
+    public ResponseEntity<List<InventoryResponseDTO>> getAllInventoriesByCreated(@PathVariable LocalDateTime created, @PathVariable Long id) {
+        return ResponseEntity.ok(service.getAllInventoriesByCreated(created, id));
     }
 
     @PostMapping

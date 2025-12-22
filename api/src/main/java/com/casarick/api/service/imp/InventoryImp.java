@@ -32,18 +32,26 @@ public class InventoryImp implements InventoryService {
         return inventoryRepository.findAll().stream().map(Mapper::toDTO).toList();
     }
 
-    /*@Override
-    public List<InventoryResponseDTO> getInventoriesWithStock() {
-        List<Inventory> inventoryList = inventoryRepository.findByStockGreaterThan(0);
-        return inventoryList.stream()
-                .map(Mapper::toDTO)
-                .toList();
-    }*/
-
     @Override
     public List<InventoryResponseDTO> getInventoriesWithStock() {
         // ESTO SOLO DEVUELVE INVENTARIOS CON STOCK > 0
         List<Inventory> inventoryList = inventoryRepository.findByStockGreaterThan(0);
+        return inventoryList.stream().map(Mapper::toDTO).toList();
+    }
+
+    @Override
+    public List<InventoryResponseDTO> getAllInventoriesByBranch(Long idBranch) {
+        Branch branch = branchRepository.findById(idBranch)
+                .orElseThrow(() -> new NotFoundException("Branch not found with id: " + idBranch));
+        List<Inventory> inventoryList = inventoryRepository.getAllByBranch(branch);
+        return inventoryList.stream().map(Mapper::toDTO).toList();
+    }
+
+    @Override
+    public List<InventoryResponseDTO> getAllInventoriesByCreated(LocalDateTime localDateTime, Long idBranch) {
+        Branch branch = branchRepository.findById(idBranch)
+                .orElseThrow(() -> new NotFoundException("Branch not found with id: " + idBranch));
+        List<Inventory> inventoryList = inventoryRepository.getAllByCreatedAndBranch(localDateTime, branch);
         return inventoryList.stream().map(Mapper::toDTO).toList();
     }
 
