@@ -8,6 +8,8 @@ com/casarick/api/service/imp/CategoryImp.class
 com/casarick/api/dto/CustomerDTO$CustomerDTOBuilder.class
 com/casarick/api/ApiApplication.class
 com/casarick/api/dto/TypeDTO$TypeDTOBuilder.class
+com/casarick/api/repository/ColorRepository.class
+com/casarick/api/model/Color$ColorBuilder.class
 com/casarick/api/service/PermissionService.class
 com/casarick/api/model/Product.class
 com/casarick/api/model/User$UserBuilder.class
@@ -25,6 +27,7 @@ com/casarick/api/dto/CustomerDTO.class
 com/casarick/api/dto/SaleResponseDTO.class
 com/casarick/api/service/imp/BranchImp.class
 com/casarick/api/controller/BranchController.class
+com/casarick/api/service/imp/ColorImp.class
 com/casarick/api/model/Inventory.class
 com/casarick/api/model/Customer.class
 com/casarick/api/dto/ProductResponseDTO.class
@@ -58,6 +61,7 @@ com/casarick/api/dto/SaleResponseDTO$SaleResponseDTOBuilder.class
 com/casarick/api/service/imp/TypeImp.class
 com/casarick/api/model/Sale$SaleBuilder.class
 com/casarick/api/controller/RoleController.class
+com/casarick/api/model/Color.class
 com/casarick/api/repository/BranchRepository.class
 com/casarick/api/model/Type$TypeBuilder.class
 com/casarick/api/service/imp/CustomerImp.class
@@ -76,14 +80,17 @@ com/casarick/api/model/Product$ProductBuilder.class
 com/casarick/api/service/ReservationService.class
 com/casarick/api/dto/RoleDTO.class
 com/casarick/api/model/Category$CategoryBuilder.class
+com/casarick/api/controller/ColorController.class
 com/casarick/api/model/Customer$CustomerBuilder.class
 com/casarick/api/model/Permission.class
 com/casarick/api/dto/PermissionDTO.class
 com/casarick/api/controller/InventoryController.class
+com/casarick/api/dto/ColorDTO$ColorDTOBuilder.class
 com/casarick/api/model/Inventory$InventoryBuilder.class
 com/casarick/api/service/CustomerService.class
 com/casarick/api/model/Sale.class
 com/casarick/api/model/Reservation$ReservationBuilder.class
+com/casarick/api/dto/ColorDTO.class
 com/casarick/api/mapper/Mapper.class
 com/casarick/api/repository/IndustryRepository.class
 com/casarick/api/dto/UserRequestDTO.class
@@ -96,6 +103,7 @@ com/casarick/api/dto/ReservationRequestDTO$ReservationRequestDTOBuilder.class
 com/casarick/api/repository/TypeRepository.class
 com/casarick/api/dto/Login.class
 com/casarick/api/dto/TypeDTO.class
+com/casarick/api/service/ColorService.class
 com/casarick/api/model/Permission$PermissionBuilder.class
 com/casarick/api/dto/ReservationResponseDTO$ReservationResponseDTOBuilder.class
 com/casarick/api/controller/PermissionController.class

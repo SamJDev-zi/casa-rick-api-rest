@@ -1,6 +1,7 @@
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/ApiApplication.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/controller/BranchController.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/controller/CategoryController.java
+/home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/controller/ColorController.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/controller/CustomerController.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/controller/IndustryController.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/controller/InventoryController.java
@@ -13,6 +14,7 @@
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/controller/UserController.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/dto/BranchDTO.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/dto/CategoryDTO.java
+/home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/dto/ColorDTO.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/dto/CustomerDTO.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/dto/IndustryDTO.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/dto/InventoryRequestDTO.java
@@ -33,6 +35,7 @@
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/mapper/Mapper.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/model/Branch.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/model/Category.java
+/home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/model/Color.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/model/Customer.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/model/Industry.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/model/Inventory.java
@@ -45,6 +48,7 @@
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/model/User.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/repository/BranchRepository.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/repository/CategoryRepository.java
+/home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/repository/ColorRepository.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/repository/CustomerRepository.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/repository/IndustryRepository.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/repository/InventoryRepository.java
@@ -57,6 +61,7 @@
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/repository/UserRepository.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/BranchService.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/CategoryService.java
+/home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/ColorService.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/CustomerService.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/IndustryService.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/InventoryService.java
@@ -69,6 +74,7 @@
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/UserService.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/imp/BranchImp.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/imp/CategoryImp.java
+/home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/imp/ColorImp.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/imp/CustomerImp.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/imp/IndustryImp.java
 /home/university/Documents/reposotorios/casa-rick-api-rest/api/src/main/java/com/casarick/api/service/imp/InventoryImp.java

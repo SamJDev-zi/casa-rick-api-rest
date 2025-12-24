@@ -64,6 +64,12 @@ CREATE TABLE IF NOT EXISTS industries(
     PRIMARY KEY(industry_id)
 );
 
+CREATE TABLE IF NOT EXISTS colors(
+    color_id BIGINT AUTO_INCREMENT,
+    color_name VARCHAR(60) UNIQUE NOT NULL,
+    PRIMARY KEY(color_id)
+);
+
 CREATE TABLE IF NOT EXISTS products(
 	product_id BIGINT AUTO_INCREMENT,
     product_name varchar(100) NOT NULL,

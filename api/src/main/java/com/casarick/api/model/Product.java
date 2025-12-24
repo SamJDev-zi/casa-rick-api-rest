@@ -44,8 +44,12 @@ public class Product {
     )
     private Industry industry;
 
-    @Column(name = "product_color")
-    private String color;
+    @ManyToOne
+    @JoinColumn(
+            name = "color_id",
+            referencedColumnName = "color_id"
+    )
+    private Color color;
 
     @Column(name = "product_size")
     private String size;

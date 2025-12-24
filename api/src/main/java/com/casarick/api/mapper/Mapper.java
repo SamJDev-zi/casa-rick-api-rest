@@ -66,6 +66,17 @@ public class Mapper {
         return null;
     }
 
+    public static ColorDTO toDTO(Color color) {
+        if (color != null) {
+            return ColorDTO.builder()
+                    .id(color.getId())
+                    .name(color.getName())
+                    .build();
+        }
+
+        return null;
+    }
+
     /**
      *
      * @param customer
@@ -175,7 +186,7 @@ public class Mapper {
                     .categoryDTO(toDTO(product.getCategory()))
                     .typeDTO(toDTO(product.getType()))
                     .industryDTO(toDTO(product.getIndustry()))
-                    .color(product.getColor())
+                    .color(toDTO(product.getColor()))
                     .size(product.getSize())
                     .photoUrl(product.getPhotoURL())
                     .barCodeNumber(product.getBarCodeNumber())
@@ -192,7 +203,7 @@ public class Mapper {
      * @param industry
      * @return Product
      */
-    public static Product toEntity(ProductRequestDTO requestDTO, Category category, Type type, Industry industry) {
+    public static Product toEntity(ProductRequestDTO requestDTO, Category category, Type type, Industry industry, Color color) {
         if (requestDTO != null) {
             return Product.builder()
                     .id(requestDTO.getId())
@@ -200,7 +211,7 @@ public class Mapper {
                     .category(category)
                     .Type(type)
                     .industry(industry)
-                    .color(requestDTO.getColor())
+                    .color(color)
                     .size(requestDTO.getSize())
                     .photoURL(requestDTO.getPhotoUrl())
                     .barCodeNumber(requestDTO.getBarCodeNumber())
