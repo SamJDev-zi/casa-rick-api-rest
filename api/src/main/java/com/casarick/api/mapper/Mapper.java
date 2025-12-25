@@ -66,6 +66,16 @@ public class Mapper {
         return null;
     }
 
+    public static ColorDTO toDTO(Color color) {
+        if (color != null) {
+            return ColorDTO.builder()
+                    .id(color.getId())
+                    .name(color.getName())
+                    .build();
+        }
+        return null;
+    }
+
     /**
      *
      * @param customer
