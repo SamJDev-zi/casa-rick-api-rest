@@ -4,6 +4,7 @@ import com.casarick.api.dto.InventoryRequestDTO;
 import com.casarick.api.dto.InventoryResponseDTO;
 import com.casarick.api.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,8 @@ public class InventoryController {
     }
 
     @GetMapping("/by-created/{created}/{id}")
-    public ResponseEntity<List<InventoryResponseDTO>> getAllInventoriesByCreated(@PathVariable LocalDateTime created, @PathVariable Long id) {
+    public ResponseEntity<List<InventoryResponseDTO>> getAllInventoriesByCreated(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                                                     LocalDateTime created, @PathVariable Long id) {
         return ResponseEntity.ok(service.getAllInventoriesByCreated(created, id));
     }
 
