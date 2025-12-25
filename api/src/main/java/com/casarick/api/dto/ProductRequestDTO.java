@@ -19,4 +19,6 @@ public class ProductRequestDTO {
     private String size;
     private String photoUrl;
     private String barCodeNumber;
+
+    //cambio xd XD
 }
