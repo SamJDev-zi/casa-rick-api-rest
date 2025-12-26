@@ -4,12 +4,8 @@ import com.casarick.api.dto.InventoryRequestDTO;
 import com.casarick.api.dto.InventoryResponseDTO;
 import com.casarick.api.exception.NotFoundException;
 import com.casarick.api.mapper.Mapper;
-import com.casarick.api.model.Branch;
-import com.casarick.api.model.Inventory;
-import com.casarick.api.model.Product;
-import com.casarick.api.repository.BranchRepository;
-import com.casarick.api.repository.InventoryRepository;
-import com.casarick.api.repository.ProductRepository;
+import com.casarick.api.model.*;
+import com.casarick.api.repository.*;
 import com.casarick.api.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +22,13 @@ public class InventoryImp implements InventoryService {
     private ProductRepository productRepository;
     @Autowired
     private BranchRepository branchRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private TypeRepository typeRepository;
+    @Autowired
+    private IndustryRepository industryRepository;
 
     @Override
     public List<InventoryResponseDTO> getAllInventories() {
@@ -58,6 +61,22 @@ public class InventoryImp implements InventoryService {
         List<Inventory> inventoryList = inventoryRepository.findByCreatedBetweenAndBranch(startOfDay, endOfDay, branch);
 
         return inventoryList.stream().map(Mapper::toDTO).toList();
+    }
+
+    @Override
+    public List<InventoryResponseDTO> filterInventory(Long categoryId, Long typeId, Long industryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new NotFoundException("Category not found with id: " + categoryId);
+        Type type = typeRepository.findById(typeId)
+                .orElseThrow(() -> new NotFoundException("Type not found with id: " + typeId);
+        Industry industry = industryRepository.findById(industryId)
+                .orElseThrow(() -> new NotFoundException("Industry not found with id: " + industryId);
+
+        List<Inventory> result = inventoryRepository.searchWithFilters(category, type, industry);
+
+        return result.stream()
+                .map(Mapper::toDTO)
+                .toList();
     }
 
     @Override
