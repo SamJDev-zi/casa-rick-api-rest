@@ -45,6 +45,15 @@ public class InventoryController {
         return ResponseEntity.ok(service.getAllInventoriesByCreated(created, id));
     }
 
+    @GetMapping("/filter/{category}/{type}/{industry}")
+    public ResponseEntity<List<InventoryResponseDTO>> filterInventory(
+            @PathVariable Long category,
+            @PathVariable Long type,
+            @PathVariable Long industry) {
+        
+        return ResponseEntity.ok(service.filterInventory(category, type, industry));
+    }
+
     @PostMapping
     public ResponseEntity<InventoryResponseDTO> createNewInventory(@RequestBody InventoryRequestDTO requestDTO) {
         InventoryResponseDTO inventory = service.createNewInventory(requestDTO);
