@@ -5,10 +5,7 @@ import com.casarick.api.dto.ProductResponseDTO;
 import com.casarick.api.exception.NotFoundException;
 import com.casarick.api.mapper.Mapper;
 import com.casarick.api.model.*;
-import com.casarick.api.repository.CategoryRepository;
-import com.casarick.api.repository.IndustryRepository;
-import com.casarick.api.repository.ProductRepository;
-import com.casarick.api.repository.TypeRepository;
+import com.casarick.api.repository.*;
 import com.casarick.api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +24,8 @@ public class ProductImp implements ProductService {
     private TypeRepository typeRepository;
     @Autowired
     private IndustryRepository industryRepository;
+    @Autowired
+    private ColorRepository colorRepository;
 
     @Override
     public List<ProductResponseDTO> getAllProducts() {
@@ -54,7 +53,10 @@ public class ProductImp implements ProductService {
         Industry industry = industryRepository.findById(requestDTO.getIndustryId())
                 .orElseThrow(() -> new NotFoundException("Industry not found with id: " + requestDTO.getIndustryId()));
 
-        Product product = Mapper.toEntity(requestDTO, category, type, industry);
+        Color color = colorRepository.findById(requestDTO.getColorId())
+                .orElseThrow(() -> new NotFoundException("Color not found with id: " + requestDTO.getColorId()));
+
+        Product product = Mapper.toEntity(requestDTO, category, type, industry, color);
 
         return Mapper.toDTO(productRepository.save(product));
     }
@@ -70,10 +72,14 @@ public class ProductImp implements ProductService {
         Industry industry = industryRepository.findById(requestDTO.getIndustryId())
                 .orElseThrow(() -> new NotFoundException("Industry not found with id: " + requestDTO.getIndustryId()));
 
+        Color color = colorRepository.findById(requestDTO.getColorId())
+                .orElseThrow(() -> new NotFoundException("Color not found with id: " + requestDTO.getColorId()));
+
         product.setName(requestDTO.getName());
         product.setCategory(category);
         product.setType(type);
         product.setIndustry(industry);
+        product.setColor(color);
 
         Product updatedProduct = productRepository.save(product);
 

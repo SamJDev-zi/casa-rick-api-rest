@@ -15,7 +15,7 @@ public class ProductResponseDTO {
     private CategoryDTO categoryDTO;
     private TypeDTO typeDTO;
     private IndustryDTO industryDTO;
-    private String color;
+    private ColorDTO color;
     private String size;
     private String photoUrl;
     private String barCodeNumber;
