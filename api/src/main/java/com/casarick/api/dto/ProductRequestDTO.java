@@ -15,7 +15,7 @@ public class ProductRequestDTO {
     private Long categoryId;
     private Long typeId;
     private Long industryId;
-    private String color;
+    private Long colorId;
     private String size;
     private String photoUrl;
     private String barCodeNumber;
