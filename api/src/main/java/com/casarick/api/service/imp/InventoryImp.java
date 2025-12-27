@@ -66,11 +66,11 @@ public class InventoryImp implements InventoryService {
     @Override
     public List<InventoryResponseDTO> filterInventory(Long categoryId, Long typeId, Long industryId) {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new NotFoundException("Category not found with id: " + categoryId);
+                .orElseThrow(() -> new NotFoundException("Category not found with id: " + categoryId));
         Type type = typeRepository.findById(typeId)
-                .orElseThrow(() -> new NotFoundException("Type not found with id: " + typeId);
+                .orElseThrow(() -> new NotFoundException("Type not found with id: " + typeId));
         Industry industry = industryRepository.findById(industryId)
-                .orElseThrow(() -> new NotFoundException("Industry not found with id: " + industryId);
+                .orElseThrow(() -> new NotFoundException("Industry not found with id: " + industryId));
 
         List<Inventory> result = inventoryRepository.searchWithFilters(category, type, industry);
 
