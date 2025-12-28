@@ -64,20 +64,27 @@ CREATE TABLE IF NOT EXISTS industries(
     PRIMARY KEY(industry_id)
 );
 
+CREATE TABLE IF NOT EXISTS colors (
+    color_id BIGINT AUTO_INCREMENT,
+    color_name VARCHAR(60) UNIQUE NOT NULL,
+    PRIMARY KEY(color_id)
+);
+
 CREATE TABLE IF NOT EXISTS products(
 	product_id BIGINT AUTO_INCREMENT,
     product_name varchar(100) NOT NULL,
     category_id BIGINT NOT NULL,
     type_id BIGINT NOT NULL,
     industry_id BIGINT NOT NULL,
-    product_color varchar(55),
+    color_id BIGINT NOT NULL,
     product_size varchar(5),
     product_photo_url VARCHAR(255),
     product_bar_code_number varchar(255) UNIQUE NOT NULL,
     PRIMARY KEY(product_id),
     FOREIGN KEY(category_id) REFERENCES categories(category_id),
     FOREIGN KEY(type_id) REFERENCES clothe_types(clothe_type_id),
-    FOREIGN KEY(industry_id) REFERENCES industries(industry_id)
+    FOREIGN KEY(industry_id) REFERENCES industries(industry_id),
+    FOREIGN KEY(color_id) REFERENCES colors(color_id)
 );
 
 CREATE TABLE IF NOT EXISTS inventories(
