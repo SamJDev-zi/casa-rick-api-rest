@@ -83,9 +83,6 @@ public class UserImp implements UserService {
         updateUser.setName(requestDTO.getName());
         updateUser.setLastName(requestDTO.getLastName());
         updateUser.setPhoneNumber(requestDTO.getPhoneNumber());
-        if (requestDTO.getPassword() != null) {
-            updateUser.setPassword(requestDTO.getPassword());
-        }
         updateUser.setRole(role);
         updateUser.setPermissions(permissionList);
 
